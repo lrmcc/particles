@@ -1,9 +1,13 @@
 *{
     box-sizing: border-box;
 }
+body{
+    align-content: center;
+    justify-content: center;
+}
 :root {
     --animation-time: 4s; 
-    
+
     --animation-left-0: 5%;
     --animation-left-25: 95%;
     --animation-left-50: 95%;
@@ -16,6 +20,12 @@
     --animation-top-75: 95%;
     --animation-top-100: 5%;
 
+    --animation-opacity-0: 1;
+    --animation-opacity-25: 1;
+    --animation-opacity-50: 1;
+    --animation-opacity-75: 1;
+    --animation-opacity-100: 1;
+
     /* --animation-color-0: 0px;
     --animation-color-25: 200px;
     --animation-color-50: 0px;
@@ -25,10 +35,9 @@
   
 .particle-container{
     margin: 20px;
-    padding: 20px;
     border-radius: 5%;
-    height: 80vh;
-    width: 80vw;
+    height: 900px;
+    width: 1400px;
     background-color: #121212;
     position: absolute;
     overflow: auto;
@@ -46,9 +55,9 @@
     animation: particle var(--animation-time) ease infinite;
 }
 @keyframes particle {
-    0%   {background-color:red; left: var(--animation-left-0); top: var(--animation-top-0);}
-    25%  {background-color:yellow; left: var(--animation-left-25); top: var(--animation-top-25);}
-    50%  {background-color:blue; left: var(--animation-left-50); top: var(--animation-top-50);}
-    75%  {background-color:green; left: var(--animation-left-75); top: var(--animation-top-75);}
-    100% {background-color:red; left: var(--animation-left-100); top: var(--animation-top-100);}
+    0%   {background-color:red; left: var(--animation-left-0); top: var(--animation-top-0); opacity: var(--animation-opacity-0);}
+    25%  {background-color:yellow; left: var(--animation-left-25); top: var(--animation-top-25);opacity: var(--animation-opacity-25);}
+    50%  {background-color:blue; left: var(--animation-left-50); top: var(--animation-top-50);opacity: var(--animation-opacity-50);}
+    75%  {background-color:green; left: var(--animation-left-75); top: var(--animation-top-75);opacity: var(--animation-opacity-75);}
+    100% {background-color:red; left: var(--animation-left-100); top: var(--animation-top-100);opacity: var(--animation-opacity-100);}
   }
