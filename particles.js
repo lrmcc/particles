@@ -1,76 +1,84 @@
-let particleID = 0;
+let numParticles = 0;
+let positions = [0,25,50,75,100];
+let animationType = "";
 
-function launchAnimation() {
-    console.log("Animation Launched");
+function launchAnimation(animType) {
+    animationType = animType;
+    console.log(animationType + " Animation Launched");
     addParticle(100);
-    for (let i = 0; i < 1; i--){
-        runAnimation();
-    }
+    runAnimation();
 }
 
 function runAnimation(){
-    updateAnimationTime();
-    for(let i = 0; i < numberParticles; i++){
-            updatePositions(i);
+    for(let i = 0; i < numParticles; i++){
+            updateParticles(i,animationType);
     }
 }
 
-function addParticle(numberParticles){
-    for(let i = 0; i < numberParticles; i++){
+function addParticle(numberParticlesCreate){
+    for(let i = 0; i < numberParticlesCreate; i++){
         let newParticle = document.createElement("div");
         newParticle.className = "particle";
-        newParticle.id = particleID;
+        newParticle.id = i;
         let particleContainer = document.querySelector('.particle-container');
-        console.log(particleContainer);
         particleContainer.appendChild(newParticle);
-        updatePositions(newParticle.id)
-        particleID++;
+        numParticles++;
     }
     
 }
 
-function updatePositions(newParticleID){
-    console.log(newParticleID);
-    let newParticle = document.getElementById(newParticleID);
-    //height: 900px; width: 1400px;
-    let positionLowWidth = getRandomArbitrary(0,1350);
-    let positionHighWidth = getRandomArbitrary(0,1350);
-    let positionLowHeight = getRandomArbitrary(0,300);
-    let positionHighHeight = getRandomArbitrary(0,300);
-    let postitionOpacity0 = Math.random();
-    let postitionOpacity25 = Math.random();
-    let postitionOpacity50 = Math.random();
-    let postitionOpacity75 = Math.random();
-    let postitionOpacity100 = Math.random();
-
-    newParticle.style.setProperty('--animation-left-0', positionLowWidth +'px');
-    newParticle.style.setProperty('--animation-left-25', positionHighWidth +'px');
-    newParticle.style.setProperty('--animation-left-50', positionHighWidth +'px');
-    newParticle.style.setProperty('--animation-left-75', positionLowWidth +'px');
-    newParticle.style.setProperty('--animation-left-100', positionLowWidth +'px');
-
-    newParticle.style.setProperty('--animation-top-0', positionLowHeight +'px');
-    newParticle.style.setProperty('--animation-top-25', positionLowHeight  +'px');
-    newParticle.style.setProperty('--animation-top-50', positionHighHeight  +'px');
-    newParticle.style.setProperty('--animation-top-75', positionHighHeight +'px');
-    newParticle.style.setProperty('--animation-top-100', positionLowHeight  +'px');
-
-    newParticle.style.setProperty('--animation-opacity-0', postitionOpacity0);
-    newParticle.style.setProperty('--animation-opacity-25', postitionOpacity25);
-    newParticle.style.setProperty('--animation-opacity-50', postitionOpacity50);
-    newParticle.style.setProperty('--animation-opacity-75', postitionOpacity75);
-    newParticle.style.setProperty('--animation-opacity-100', postitionOpacity100);
-
+function updateParticles(particleID, animationType){
+    console.log(animationType);
+    let particleToUpdate = document.getElementById(particleID);
+    updateAnimationTime(particleToUpdate);
+    if (animationType == "square") updateSquareParticle(particleToUpdate);
+    if (animationType == "up") updateUpParticle(particleToUpdate);
+    
 }
 
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
   }
 
-function updateAnimationTime() {
-    for(let i = 0; i < particleID; i++ ){
-        let time = 10 * Math.random() + 2; 
-        let part = document.getElementById(i);
-        part.style.setProperty('--animation-time', time +'s');
+function updateAnimationTime(particleToUpdate) {
+    let time = 10 * Math.random() + 2; 
+    particleToUpdate.style.setProperty('--animation-time', time +'s');
+}
+
+function updateSquareParticle(particleToUpdate){
+    let width = getRandomArbitrary(400,1000);
+    let widthVariance = getRandomArbitrary(0,400);
+    let positionWidth = [width/2, width, width-widthVariance, width+widthVariance, width];
+    let height = getRandomArbitrary(200,700);
+    let heightVariance = getRandomArbitrary(0,150);
+    let positionTop = [height/2, height, height+(heightVariance/2), height+(heightVariance/2), height];
+    let postitionOpacity = [Math.random(),Math.random(),Math.random(),Math.random()];
+
+    for(let i = 0; i < positions.length; i++){
+        let animateTopVar = '--animation-top-' + positions[i];
+        let animateLeftVar = '--animation-left-' + positions[i];
+        let animateOpacVar = '--animation-opacity-' + positions[i];
+        particleToUpdate.style.setProperty(animateTopVar, positionTop[i] +'px');
+        particleToUpdate.style.setProperty(animateLeftVar, positionWidth[i] +'px');
+        particleToUpdate.style.setProperty(animateOpacVar, postitionOpacity[i]);
+    }
+}
+function updateUpParticle(particleToUpdate){
+    let width = getRandomArbitrary(400,1000);
+    let widthVariance = getRandomArbitrary(0,400);
+    let positionWidth = [width/2, width, width-widthVariance, width+widthVariance, width];
+    let positionTop = [850,650,450,250,50];
+    let postitionOpacity = [1,.8,.5,.3,0];
+    let bckgrdColors = ["#e3dede","#bab6b6","#737070","#383838","#121212"];
+
+    for(let i = 0; i < positions.length; i++){
+        let animateLeftVar = '--animation-left-' + positions[i];
+        let animateTopVar = '--animation-top-' + positions[i];
+        let animateOpacVar = '--animation-opacity-' + positions[i];
+        let animateColorVar = '--animation-color-' + positions[i];
+        particleToUpdate.style.setProperty(animateTopVar, positionTop[i] +'px');
+        particleToUpdate.style.setProperty(animateLeftVar, positionWidth[i] +'px');
+        particleToUpdate.style.setProperty(animateOpacVar, postitionOpacity[i]);
+        particleToUpdate.style.setProperty(animateColorVar, bckgrdColors[i]);
     }
 }
