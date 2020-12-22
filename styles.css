@@ -3,17 +3,18 @@
 }
 :root {
     --animation-time: 4s; 
-    --animation-left-0: 0px;
-    --animation-left-25: 1100px;
-    --animation-left-50: 1100px;
-    --animation-left-75: 0px;
-    --animation-left-100: 0px;
+    
+    --animation-left-0: 5%;
+    --animation-left-25: 95%;
+    --animation-left-50: 95%;
+    --animation-left-75: 5%;
+    --animation-left-100: 5%;
 
-    --animation-top-0: 0px;
-    --animation-top-25: 0px;
-    --animation-top-50: 700px;
-    --animation-top-75: 700px;
-    --animation-top-100: 0px;
+    --animation-top-0: 5%;
+    --animation-top-25: 5%;
+    --animation-top-50: 95%;
+    --animation-top-75: 95%;
+    --animation-top-100: 5%;
 
     /* --animation-color-0: 0px;
     --animation-color-25: 200px;
