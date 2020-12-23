@@ -1,10 +1,7 @@
 *{
     box-sizing: border-box;
 }
-body{
-    align-content: center;
-    justify-content: center;
-}
+
 :root {
     --animation-time: 4s; 
 
@@ -30,9 +27,27 @@ body{
     --animation-color-25: yellow;
     --animation-color-50: blue;
     --animation-color-75: green;
-    --animation-color-100: red; 
+    --animation-color-100: red;
+    
+    --animation-blur-0: #0ff;
+    --animation-blur-25: #0ff;
+    --animation-blur-50: #0ff;
+    --animation-blur-75: #0ff;
+    --animation-blur-100: #0ff;
+
+    --animation-translateX-0: 0px;
+    --animation-translateX-25: 0px;
+    --animation-translateX-50: 0px;
+    --animation-translateX-75: 0px;
+    --animation-translateX-100: 0px;
+
+    --animation-translateY-0: 0px;
+    --animation-translateY-25: 0px;
+    --animation-translateY-50: 0px;
+    --animation-translateY-75: 0px;
+    --animation-translateY-100: 0px;
   }
-  
+
 .particle-container{
     margin: 20px;
     border-radius: 5%;
@@ -44,20 +59,23 @@ body{
 }
 .particle{
     padding: 3px;
-    top:0;
-    left:0;
+    top:800;
+    left:600;
     position: relative;
     height: 5px;
     width: 5px;
     border-color: black;
     background-color: whitesmoke;
     border-radius: 50%;
+    box-shadow: 0px 0px 2px 2px #0ff;
     animation: particle var(--animation-time) ease infinite;
+    transform: translate(0px,0px);
 }
+
 @keyframes particle {
-    0%   {background-color: var(--animation-color-0); left: var(--animation-left-0); top: var(--animation-top-0); opacity: var(--animation-opacity-0);}
-    25%  {background-color:var(--animation-color-25); left: var(--animation-left-25); top: var(--animation-top-25);opacity: var(--animation-opacity-25);}
-    50%  {background-color:var(--animation-color-50); left: var(--animation-left-50); top: var(--animation-top-50);opacity: var(--animation-opacity-50);}
-    75%  {background-color:var(--animation-color-75); left: var(--animation-left-75); top: var(--animation-top-75);opacity: var(--animation-opacity-75);}
-    100% {background-color:var(--animation-color-100); left: var(--animation-left-100); top: var(--animation-top-100);opacity: var(--animation-opacity-100);}
-  }
+    0%   {background-color: var(--animation-color-0); opacity: var(--animation-opacity-0); box-shadow: 0px 0px 3px 3px var(--animation-blur-0); transform: translate(var(--animation-translateX-0), var(--animation-translateY-0));}
+    25%  {background-color:var(--animation-color-25); opacity: var(--animation-opacity-25); box-shadow: 0px 0px 3px 3px var(--animation-blur-25); transform: translate(var(--animation-translateX-25), var(--animation-translateY-25));}
+    50%  {background-color:var(--animation-color-50); opacity: var(--animation-opacity-50); box-shadow: 0px 0px 2px 2px var(--animation-blur-50); transform: translate(var(--animation-translateX-50), var(--animation-translateY-50));}
+    75%  {background-color:var(--animation-color-75); opacity: var(--animation-opacity-75); box-shadow: 0px 0px 2px 2px var(--animation-blur-75); transform: translate(var(--animation-translateX-75), var(--animation-translateY-75));}
+    100% {background-color:var(--animation-color-100); opacity: var(--animation-opacity-100); box-shadow: 0px 0px 1px 1px var(--animation-blur-100); transform: translate(var(--animation-translateX-100), var(--animation-translateY-100));}
+}

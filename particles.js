@@ -28,57 +28,62 @@ function addParticle(numberParticlesCreate){
 }
 
 function updateParticles(particleID, animationType){
-    console.log(animationType);
     let particleToUpdate = document.getElementById(particleID);
+    console.log(particleToUpdate.id);
     updateAnimationTime(particleToUpdate);
-    if (animationType == "square") updateSquareParticle(particleToUpdate);
+    if (animationType == "clockwise") updateClockwiseParticle(particleToUpdate);
     if (animationType == "up") updateUpParticle(particleToUpdate);
     
 }
 
-function getRandomArbitrary(min, max) {
+function getRandom(min, max) {
     return Math.random() * (max - min) + min;
   }
 
 function updateAnimationTime(particleToUpdate) {
     let time = 10 * Math.random() + 2; 
+
     particleToUpdate.style.setProperty('--animation-time', time +'s');
 }
 
-function updateSquareParticle(particleToUpdate){
-    let width = getRandomArbitrary(400,1000);
-    let widthVariance = getRandomArbitrary(0,400);
-    let positionWidth = [width/2, width, width-widthVariance, width+widthVariance, width];
-    let height = getRandomArbitrary(200,700);
-    let heightVariance = getRandomArbitrary(0,150);
-    let positionTop = [height/2, height, height+(heightVariance/2), height+(heightVariance/2), height];
+function updateClockwiseParticle(particleToUpdate){
+    let postitionTranslateX = [getRandom(0,700),getRandom(700,1400),getRandom(700,1400),getRandom(0,700),getRandom(0,700)];
+    let postitionTranslateY = [getRandom(0,450),getRandom(0,450),getRandom(450,900),getRandom(450,900),getRandom(0,450)];
     let postitionOpacity = [Math.random(),Math.random(),Math.random(),Math.random()];
 
     for(let i = 0; i < positions.length; i++){
-        let animateTopVar = '--animation-top-' + positions[i];
-        let animateLeftVar = '--animation-left-' + positions[i];
+        let animateTranslateXVar = '--animation-translateX-' + positions[i];
+        let animateTranslateYVar = '--animation-translateY-' + positions[i];
         let animateOpacVar = '--animation-opacity-' + positions[i];
-        particleToUpdate.style.setProperty(animateTopVar, positionTop[i] +'px');
-        particleToUpdate.style.setProperty(animateLeftVar, positionWidth[i] +'px');
+        particleToUpdate.style.setProperty(animateTranslateXVar, postitionTranslateX[i] + "px");
+        particleToUpdate.style.setProperty(animateTranslateYVar, postitionTranslateY[i] + "px");
         particleToUpdate.style.setProperty(animateOpacVar, postitionOpacity[i]);
     }
 }
 function updateUpParticle(particleToUpdate){
-    let width = getRandomArbitrary(400,1000);
-    let widthVariance = getRandomArbitrary(0,400);
-    let positionWidth = [width/2, width, width-widthVariance, width+widthVariance, width];
-    let positionTop = [850,650,450,250,50];
+    let postitionTranslateX = [getRandom(0,1400),getRandom(0,1400),getRandom(0,1400),getRandom(0,1400),getRandom(0,1400)];
+    let postitionTranslateY = [900,700,500,300,100];
     let postitionOpacity = [1,.8,.5,.3,0];
     let bckgrdColors = ["#e3dede","#bab6b6","#737070","#383838","#121212"];
+    let blurColors = ["#e3dede","#bab6b6","#737070","#383838","#121212"];
 
     for(let i = 0; i < positions.length; i++){
-        let animateLeftVar = '--animation-left-' + positions[i];
-        let animateTopVar = '--animation-top-' + positions[i];
+        let animateTranslateXVar = '--animation-translateX-' + positions[i];
+        let animateTranslateYVar = '--animation-translateY-' + positions[i];
         let animateOpacVar = '--animation-opacity-' + positions[i];
         let animateColorVar = '--animation-color-' + positions[i];
-        particleToUpdate.style.setProperty(animateTopVar, positionTop[i] +'px');
-        particleToUpdate.style.setProperty(animateLeftVar, positionWidth[i] +'px');
+        let animateBlurVar = '--animation-blur-' + positions[i];
+        particleToUpdate.style.setProperty(animateTranslateXVar, postitionTranslateX[i] + "px");
+        particleToUpdate.style.setProperty(animateTranslateYVar, postitionTranslateY[i] + "px");
         particleToUpdate.style.setProperty(animateOpacVar, postitionOpacity[i]);
         particleToUpdate.style.setProperty(animateColorVar, bckgrdColors[i]);
+        particleToUpdate.style.setProperty(animateBlurVar, blurColors[i]);
     }
+}
+
+function clearAnimation(){
+    let particleContainer = document.querySelector('.particle-container');
+    while (particleContainer.lastElementChild) {
+        particleContainer.removeChild(particleContainer.lastElementChild);
+  }
 }
