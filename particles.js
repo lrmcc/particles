@@ -29,10 +29,10 @@ function addParticle(numberParticlesCreate){
 
 function updateParticles(particleID, animationType){
     let particleToUpdate = document.getElementById(particleID);
-    console.log(particleToUpdate.id);
     updateAnimationTime(particleToUpdate);
     if (animationType == "clockwise") updateClockwiseParticle(particleToUpdate);
     if (animationType == "up") updateUpParticle(particleToUpdate);
+    if (animationType == "down") updateDownParticle(particleToUpdate);
     
 }
 
@@ -67,6 +67,28 @@ function updateUpParticle(particleToUpdate){
     let bckgrdColors = ["#e3dede","#bab6b6","#737070","#383838","#121212"];
     let blurColors = ["#e3dede","#bab6b6","#737070","#383838","#121212"];
 
+    for(let i = 0; i < positions.length; i++){
+        let animateTranslateXVar = '--animation-translateX-' + positions[i];
+        let animateTranslateYVar = '--animation-translateY-' + positions[i];
+        let animateOpacVar = '--animation-opacity-' + positions[i];
+        let animateColorVar = '--animation-color-' + positions[i];
+        let animateBlurVar = '--animation-blur-' + positions[i];
+        particleToUpdate.style.setProperty(animateTranslateXVar, postitionTranslateX[i] + "px");
+        particleToUpdate.style.setProperty(animateTranslateYVar, postitionTranslateY[i] + "px");
+        particleToUpdate.style.setProperty(animateOpacVar, postitionOpacity[i]);
+        particleToUpdate.style.setProperty(animateColorVar, bckgrdColors[i]);
+        particleToUpdate.style.setProperty(animateBlurVar, blurColors[i]);
+    }
+}
+
+function updateDownParticle(particleToUpdate){
+    let downX = getRandom(0,1400);
+    let postitionTranslateX = [downX+50,downX+50,downX+50,downX+50,downX+50];
+    let postitionTranslateY = [100,300,500,700,900];
+    let postitionOpacity = [1,.8,.5,.3,0];
+    let bckgrdColors = ["#336bc4","#2a58a1","#20447d","#0d3678","#082554"];
+    let blurColors = ["#2cb1bf","#2797a3","#1f7680","#145961","#09464d"];
+    particleToUpdate.style.setProperty("animation-timing-function", "linear");
     for(let i = 0; i < positions.length; i++){
         let animateTranslateXVar = '--animation-translateX-' + positions[i];
         let animateTranslateYVar = '--animation-translateY-' + positions[i];
